@@ -16,7 +16,7 @@ exports.up = async (knex) => {
       table.string('startTime', 200)
       table.string('startDate', 200)
       table.string('location', 200)
-      table.integer('duration', 200)
+      table.decimal2('duration', 200)
       table.string('intensity', 200)
       table.integer('user_id').references("user_id").inTable("users")
 
