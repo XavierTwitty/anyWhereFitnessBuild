@@ -5,6 +5,8 @@ const db = require('./data/db-config')
 
 function getAllUsers() { return db('users') }
 
+function getAllClasses() { return db('classes') }
+
 async function insertUser(user) {
   // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
   // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
@@ -24,6 +26,10 @@ server.get('/api/users', async (req, res) => {
 
 server.post('/api/users', async (req, res) => {
   res.status(201).json(await insertUser(req.body))
+})
+
+server.get('/api/classes', async (req, res) => {
+  res.json(await getAllClasses())
 })
 
 module.exports = server
