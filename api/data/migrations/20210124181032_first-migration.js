@@ -5,7 +5,7 @@ exports.up = async (knex) => {
       table.string('username', 200).notNullable().unique()
       table.string('password', 200).notNullable()
       table.string('email', 200).notNullable().unique()
-      table.string('role_name', 200).notNullable()
+      table.string('role_name', 200)
       table.integer('class_id')// using a forenkey to see users class by name 
       table.timestamps(false, true)
     })
