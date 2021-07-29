@@ -1,6 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
+//add RESTRICT and only middleware 
 
 const server = express()
 
