@@ -39,8 +39,19 @@ try {
 }
 }
 
+
+function restricted(req, res, next) {
+
+}
+
+function only(req, res, next) {
+
+}
+
 module.exports = {
     validateUser,
     validateRoleNAme,
-    checkIfUsernameExists
+    checkIfUsernameExists,
+    restricted,
+    only
 }

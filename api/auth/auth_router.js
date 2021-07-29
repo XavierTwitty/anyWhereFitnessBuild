@@ -2,7 +2,7 @@ const router = require("express").Router()
 const {insertUser} = require("../users/users_model")
 const {validateUser, validateRoleNAme, checkIfUsernameExists} = require("./auth_middleware")
 
-router.post('/register', validateUser, validateRoleNAme, async (req, res) => {
+router.post('/register', validateUser, validateRoleNAme, async (req, res) => { // validateRole name auto makes newUser a student
     res.status(201).json(await insertUser(req.body))
   })
 
@@ -11,3 +11,5 @@ router.post('/register', validateUser, validateRoleNAme, async (req, res) => {
   })
 
   module.exports = router
+
+  // validate role name , migrations, push pull and merge 
