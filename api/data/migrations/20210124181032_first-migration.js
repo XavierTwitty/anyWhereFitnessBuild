@@ -10,8 +10,8 @@ exports.up = async (knex) => {
     })
     .createTable('classes', (table) => {
       table.increments('class_id')
-      table.string('name', 200).notNullable()
-      table.string('type', 200).notNullable()
+      table.string('class_name', 200).notNullable()
+      table.string('class_type', 200).notNullable()
       table.string('startTime', 200)
       table.string('startDate', 200)
       table.string('location', 200)
