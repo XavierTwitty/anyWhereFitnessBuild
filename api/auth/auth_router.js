@@ -12,4 +12,3 @@ router.post('/register', validateUser, validateRoleNAme, async (req, res) => { /
 
   module.exports = router
 
-  // validate role name , migrations, push pull and merge 

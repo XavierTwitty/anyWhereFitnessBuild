@@ -6,7 +6,6 @@ exports.up = async (knex) => {
       table.string('password', 200).notNullable()
       table.string('email', 200).notNullable().unique()
       table.string('role_name', 200).defaultTo("students")
-      table.integer('class_id')// using a forenkey to see users class by name that already exist 
       table.timestamps(false, true)
     })
     .createTable('classes', (table) => {
