@@ -9,4 +9,14 @@ router.get('/', async (req, res) => {
   //   res.json(await findById())
   // })
 
+  router.put("/:id", (req, res, next) => {
+    res.json({message:"updating a user "})
+    next()
+  })
+
+  router.delete("/:id", (req, res, next) => {
+    res.json({message:"deleting a user a user "})
+    next()
+  })
+
 module.exports = router 
