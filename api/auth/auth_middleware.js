@@ -1,4 +1,6 @@
 const { findBy } = require("../users/users_model");
+const {jwtSecret} = require("../secrets")
+const jwt = require("jsonwebtoken")
 
 function validateUser(req, res, next) {
     if (!req.body.username || !req.body.password || !req.body.email) {
@@ -41,11 +43,26 @@ try {
 
 
 function restricted(req, res, next) {
-
+const token = req.headers.authorization
+if(!token) {
+    return next({status: 401, message: "token required"})
+}
+jwt.verify(token, jwtSecret, (err, decodedToken) => {
+    if (err) {
+        next({status: 401, message: "token invalid"})
+    } else {
+        req.decodedToken = decodedToken
+        next()
+    }
+})
 }
 
-function only(req, res, next) {
-
+const only = (role_name) => (req, res, next) => {
+    if ((role_name === req.decodedToken.role_name)) {
+        next()
+    } else {
+        next({status: 401 , message: "this is not you"})
+    }
 }
 
 module.exports = {
