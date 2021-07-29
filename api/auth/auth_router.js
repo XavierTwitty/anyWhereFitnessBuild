@@ -1,13 +1,13 @@
 const router = require("express").Router()
-const {insertUser} = require("./auth_model")
-const {validateUser} = require("./auth_middleware")
+const {insertUser} = require("../users/users_model")
+const {validateUser, validateRoleNAme, checkIfUsernameExists} = require("./auth_middleware")
 
-router.post('/register', validateUser, async (req, res) => {
+router.post('/register', validateUser, validateRoleNAme, async (req, res) => {
     res.status(201).json(await insertUser(req.body))
   })
 
-  router.post('/login', (req, res, next) => {
-      
+  router.post('/login', checkIfUsernameExists, (req, res, next) => {
+      res.json({message: "logged in "})
   })
 
   module.exports = router
