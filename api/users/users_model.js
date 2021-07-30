@@ -25,12 +25,24 @@ async function insertUser(user) {
       .where(filter)
   }
 
-  // function findById (user_id) {
-  //   return db ("users as u")
-  //   .join("classes as c", "u.user_id", "c.user_id")
-  //   .select("u.*", "c.name" , "c.class_id")
-  //   .where("u.user_id", user_id)
-  //   .first()
-  // }
+  function findById (user_id) {
+    return db ("users as u")
+    .join("classes as c", "u.user_id", "c.user_id")
+    .select("u.*", "c.name" , "c.class_id")
+    .where("u.user_id", user_id)
+    .first()
+  }
 
-module.exports = {getAllUsers, insertUser, findBy, getsUsers}
+ function update (id, changes) {
+   return db ('users')
+   .where('id', id)
+   .update(changes)
+ }
+
+// function delete (id) {
+//   return db('users')
+//   .where('id', id)
+//   .del()
+// }
+
+module.exports = {getAllUsers, insertUser, findBy, getsUsers, update, findById}

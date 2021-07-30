@@ -14,7 +14,7 @@ router.post('/register', validateUser, validateRoleNAme, async (req, res, next) 
   next()
   })
 
-  router.post('/login', checkIfUsernameExists, (req, res, next) => {
+  router.post('/login', checkIfUsernameExists, (req, res, next) => { // error no response on existing user 
     if (bcrypt.compareSync(req.body.username, req.body.password)) {
       const token = buildToken(req.user)
       res.status(200).json({
