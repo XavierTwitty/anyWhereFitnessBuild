@@ -14,8 +14,9 @@ router.post('/register', validateUser, validateRoleNAme, async (req, res, next) 
   next()
   })
 
-  router.post('/login', checkIfUsernameExists, (req, res, next) => { // error no response on existing user 
-    if (bcrypt.compareSync(req.body.username, req.body.password)) {
+  router.post('/login', checkIfUsernameExists, (req, res, next) => { 
+    res.json({message: "login endpoint"})
+    if (bcrypt.compareSync(req.body.password, req.user.password)) {
       const token = buildToken(req.user)
       res.status(200).json({
         message: `${req.user.username} Welcome Back!`,
@@ -27,6 +28,8 @@ router.post('/register', validateUser, validateRoleNAme, async (req, res, next) 
         message: "invalid credentials"
       })
     }
+   
+    
       
   })
 
@@ -37,7 +40,7 @@ router.post('/register', validateUser, validateRoleNAme, async (req, res, next) 
       username: user.username
     }
     const options = {
-      expiresIn: "id"
+      expiresIn: "1d"
     }
     return jwt.sign(payload, jwtSecret, options)
   }

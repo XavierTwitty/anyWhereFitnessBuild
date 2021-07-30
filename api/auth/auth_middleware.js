@@ -16,9 +16,9 @@ function validateUser(req, res, next) {
 
 function validateRoleNAme(req, res , next) {
     if (!req.body.role_name || !req.body.role_name.trim()) {
-        req.role_name = "students";
+        req.role_name = "student";
         next()
-    } else if (req.body.role_name.trim() === "Instructor") {
+    } else if (req.body.role_name.trim() === "instructor") {
         next({next: 422, message: "Role Name cannot be Instructor"})
     } else {
         req.role_name = req.body.role_name.trim()
@@ -37,7 +37,7 @@ try {
         next()
     }
 } catch (err) {
-    next({err})
+    next(err)
 }
 }
 
@@ -58,6 +58,7 @@ jwt.verify(token, jwtSecret, (err, decodedToken) => {
 }
 
 const only = (role_name) => (req, res, next) => {
+    // console.log("only can use")
     if ((role_name === req.decodedToken.role_name)) {
         next()
     } else {

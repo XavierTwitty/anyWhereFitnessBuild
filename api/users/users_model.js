@@ -15,7 +15,7 @@ async function insertUser(user) {
     // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
     // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
     // UNLIKE SQLITE WHICH FORCES US DO DO A 2ND DB CALL
-    const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password', 'email', 'role_name'])// user logins and auto becomes student
+    const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password', 'email', 'role_name'])
     return newUserObject // { user_id: 7, username: 'foo', password: 'xxxxxxx' }
   }
 
@@ -23,26 +23,35 @@ async function insertUser(user) {
       return db ("users as u")
       .select("u.user_id", "u.username", "u.password")
       .where(filter)
+      
   }
 
   function findById (user_id) {
     return db ("users as u")
-    .join("classes as c", "u.user_id", "c.user_id")
-    .select("u.*", "c.name" , "c.class_id")
+    .join( "classes as c","u.user_id", "c.user_id")
+    .select("u.*", "c.class_name" , "c.class_id")
     .where("u.user_id", user_id)
     .first()
   }
 
- function update (id, changes) {
+ function update (user_id, changes) {
    return db ('users')
-   .where('id', id)
+   .where('user_id', user_id)
    .update(changes)
  }
 
-// function delete (id) {
-//   return db('users')
-//   .where('id', id)
-//   .del()
-// }
+function remove (user_id) {
+  return db('users')
+  .where('user_id', user_id)
+  .del()
+}
 
-module.exports = {getAllUsers, insertUser, findBy, getsUsers, update, findById}
+module.exports = {
+  getAllUsers, 
+  insertUser,
+   findBy,
+    getsUsers, 
+    update, 
+    findById,
+    remove
+  }

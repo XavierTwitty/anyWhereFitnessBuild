@@ -9,6 +9,7 @@ exports.seed = function(knex) {
         {username: 'nojumper', password: '1234', email:'foo@aol.com', role_name:'student'},
         {username: 'earlyBird', password: '1234', email:'zoo@aol.com', role_name:'student'},
         {username: 'Jonjocaob', password: '1234', email:'gman@aol.com', role_name:'student'},
+        {username: 'Jonjoob', password: '1234', email:'gn@aol.com', role_name:'instructor'},
 
       ]);
     });

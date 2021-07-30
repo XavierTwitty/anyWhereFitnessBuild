@@ -5,7 +5,7 @@ exports.up = async (knex) => {
       table.string('username', 200).notNullable().unique()
       table.string('password', 200).notNullable()
       table.string('email', 200).notNullable().unique()
-      table.string('role_name', 200).defaultTo("students")
+      table.string('role_name', 200).defaultTo("student")
       table.timestamps(false, true)
     })
     .createTable('classes', (table) => {
@@ -17,7 +17,7 @@ exports.up = async (knex) => {
       table.string('location', 200)
       table.integer('duration', 200)
       table.string('intensity', 200)
-      table.integer('user_id').references("user_id").inTable("users")
+      table.integer('user_id').references("user_id").inTable("users").onDelete("CASCADE")
 
     }) 
    

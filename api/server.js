@@ -1,7 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
-//add RESTRICT and only middleware 
+const  {restricted} = require("./auth/auth_middleware")
 
 const server = express()
 
@@ -14,8 +14,8 @@ server.use(helmet())
 server.use(cors())
 
 server.use("/api/auth", authRouter)
-server.use("/api/users", usersRouter)
-server.use("/api/classes", classRouter)
+server.use("/api/users", restricted, usersRouter)
+server.use("/api/classes", restricted, classRouter)
 
 server.get("/", (req, res) => {
   res.json({
